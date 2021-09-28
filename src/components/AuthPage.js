@@ -19,7 +19,7 @@ const StyledOverlay = styled('div')`
   width: 100vw;
   height: 100vh;
 
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(20px);
 `
 

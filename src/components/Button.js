@@ -8,6 +8,7 @@ const StyledButton = styled(motion.button)`
 
   width: 100%;
   height: 50px;
+  margin-top: 7px;
 
   color: white;
   font-family: Roboto;
@@ -29,21 +30,22 @@ const StyledButton = styled(motion.button)`
     cursor: pointer;
   }
 `
-function Button({text, type}) {
+function Button({text, type, clickHandler}) {
   return (
-    <StyledButton
-      whileHover={{
-        scale: 1.02,
-        transition: {type: "Inertia", duration: 0.2},
-      }}
-      whileTap={{
-        scale: 0.98,
-        transition: {type: "Inertia", duration: 0.2},
-      }}
-      type={type}
-    >
-      {text}
-    </StyledButton>
+      < StyledButton
+        whileHover={{
+          scale: 1.02,
+          transition: {type: "Inertia", duration: 0.2},
+        }}
+        whileTap={{
+          scale: 0.98,
+          transition: {type: "Inertia", duration: 0.2},
+        }}
+        type={type}
+        onClick={clickHandler}
+      >
+        {text}
+      </StyledButton>
   )
 }
 

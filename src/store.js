@@ -3,13 +3,22 @@ import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly'
 import rootReducer from "./reducers/reducer"
 import createSagaMiddleware from 'redux-saga'
 import {helloSaga} from './reducers/sagas'
+import {loadState, saveState} from "./reducers/local-storage.js";
+import {throttle} from "lodash";
+
+const persistedState = loadState();
 
 const sagaMiddleware = createSagaMiddleware()
 
 const store = createStore(
   rootReducer,
+  persistedState,
   composeWithDevTools(applyMiddleware(sagaMiddleware))
 )
+
+store.subscribe(throttle(() => {
+  saveState(store.getState());
+}, 1000));
 
 sagaMiddleware.run(helloSaga)
 

@@ -1,9 +1,11 @@
 import {useState} from 'react'
 import styled from 'styled-components'
+import { useFormik } from "formik"
 
 const StyledWrapper = styled('div')`
   display: flex;
   flex-direction: column;
+  position: relative;
 `
 
 const StyledLabel = styled('label')`
@@ -30,25 +32,27 @@ const StyledInput = styled('input')`
   border: 1px solid #C9CACC
 `
 
-function InputWithLabel({type, labelText, placeholder, name, isRequired}) {
-  const [inputValue, setInputValue] = useState('')
+const StyledErrorMessage = styled('div')`
+  bottom: 5px;
+  left: 5px;
+  color: #EB1717;
+`
 
-  const inputChangeHandler = (e) => {
-    setInputValue(e.target.value)
-  }
-
+function InputWithLabel({type, labelText, placeholder, name, isRequired, onChangeHandler, onBlurHandler, value, error}) {
   return (
     <StyledWrapper>
       <StyledLabel htmlFor={name}>{labelText}</StyledLabel>
       <StyledInput
         type={type}
-        value={inputValue}
+        onChange={onChangeHandler}
+        onBlur={onBlurHandler}
+        value={value}
         placeholder={placeholder}
         name={name}
         required={isRequired}
         autoComplete="off"
-        onChange={(e) => inputChangeHandler(e)}
       />
+      {error ? <StyledErrorMessage>{error}</StyledErrorMessage> : null}
     </StyledWrapper>
   )
 }

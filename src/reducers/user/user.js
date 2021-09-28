@@ -2,19 +2,20 @@ import {extend} from "../../utils/common.js";
 import produce from 'immer';
 
 export const initialState = {
-  user: {
-    login: null,
-    password: null,
-  }
+  isAuthentificated: false,
 };
 
 export const ActionType = {
-  SET_USER_DATA: `SET_USER_DATA`
+  CHANGE_IS_AUTHENTICATED: `CHANGE_IS_AUTHENTICATED`,
+  loginForm: {
+    loginInput: null,
+    passwordInput: null,
+  }
 }
 
 export const ActionCreator = {
   setUserData: (userData) => ({
-    type: ActionType.SET_USER_DATA,
+    type: ActionType.CHANGE_IS_AUTHENTICATED,
     payload: userData,
   }),
 };
@@ -22,8 +23,8 @@ export const ActionCreator = {
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case ActionType.SET_USER_DATA:
-      return extend(state, {user: action.payload});
+    case ActionType.CHANGE_IS_AUTHENTICATED:
+      return extend(state, {isAuthentificated: !state.isAuthentificated});
 
     default:
       return state;

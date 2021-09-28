@@ -1,36 +1,30 @@
-import React, {useState, useEffect} from "react"
-import {Switch, Route, BrowserRouter} from "react-router-dom"
+import React, {useEffect} from "react"
+import {useSelector} from 'react-redux'
+import {Switch, Route, Router} from "react-router-dom"
 import history from "../history.js";
 import AuthPage from "./AuthPage"
 import MainPage from "./MainPage"
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  // const counter = useSelector((state) => state.counter)
+
+  const isAuthentificated = useSelector((state) => state.USER.isAuthentificated)
+  console.log('isAuthenticated - ' + isAuthentificated)
 
   useEffect(() => {
-    history.push('/auth')
-  }, [isAuthenticated]);
-
-  useEffect(() => {
-    setIsAuthenticated(JSON.parse(window.localStorage.getItem('isAuthenticated')));
-  }, []);
-
-  useEffect(() => {
-    window.localStorage.setItem('isAuthenticated', isAuthenticated);
-  }, [isAuthenticated])
+    if (isAuthentificated) {
+      history.push('/main')
+    } else {
+      history.push('/auth')
+    }
+  }, [isAuthentificated]);
 
   return (
-    <BrowserRouter history={history}>
+    <Router history={history}>
       <Switch>
-        <Route exact path={"/auth"}>
-          <AuthPage />
-        </Route>
-        <Route exact path={"/"}>
-          <MainPage />
-        </Route>
+        <Route exact path={"/auth"} component={AuthPage} />
+        <Route exact path={"/main"} component={MainPage} />
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 }
 
