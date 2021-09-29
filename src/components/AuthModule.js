@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import Button from "./Button"
-import InputWithLabel from "./Input"
+import InputWithLabel from "./InputWithLabel"
 import {useDispatch} from 'react-redux'
 import {useFormik} from 'formik';
 import {Link} from "react-router-dom"
@@ -63,7 +63,11 @@ function AuthModule() {
   });
 
   return (
-    <StyledForm onSubmit={formik.handleSubmit}>
+    <StyledForm
+      onSubmit={formik.handleSubmit}
+      validateOnChange={false}
+      validateOnBlur={false}
+    >
       <StyledTitle>Simple Hotel Check</StyledTitle>
       <InputWithLabel
         type="email"
@@ -85,7 +89,7 @@ function AuthModule() {
         value={formik.values.password}
         error={formik.errors.password}
       />
-      <Button text={'Войти'} type={'submit'}/>
+      <Button text={'Войти'} type={'submit'} />
       <Link to="/main">Ссылка</Link>
     </StyledForm>
   )

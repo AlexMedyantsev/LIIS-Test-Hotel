@@ -1,6 +1,4 @@
-import {useState} from 'react'
 import styled from 'styled-components'
-import { useFormik } from "formik"
 
 const StyledWrapper = styled('div')`
   display: flex;
@@ -17,19 +15,28 @@ const StyledLabel = styled('label')`
   letter-spacing: 0em;
   text-align: left;
   margin-bottom: 7px;
+  color: ${props => props.color}
 `
 
 const StyledInput = styled('input')`
   display: flex;
+  position: relative;
 
   width: 100%;
   height: 50px;
-  margin-bottom: 27px;
+  margin-bottom: 20px;
   padding: 16px;
 
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
   font-weight: 300;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: left;
+
   border-radius: 4px;
-  border: 1px solid #C9CACC
+  border: 1px solid ${props => props.borderColor};
 `
 
 const StyledErrorMessage = styled('div')`
@@ -38,10 +45,11 @@ const StyledErrorMessage = styled('div')`
   color: #EB1717;
 `
 
+
 function InputWithLabel({type, labelText, placeholder, name, isRequired, onChangeHandler, onBlurHandler, value, error}) {
   return (
     <StyledWrapper>
-      <StyledLabel htmlFor={name}>{labelText}</StyledLabel>
+      <StyledLabel htmlFor={name} color={error ? '#EB1717' : '#424242'}>{labelText} </StyledLabel>
       <StyledInput
         type={type}
         onChange={onChangeHandler}
@@ -51,9 +59,10 @@ function InputWithLabel({type, labelText, placeholder, name, isRequired, onChang
         name={name}
         required={isRequired}
         autoComplete="off"
+        borderColor={error ? '#EB1717' : '#C9CACC'}
       />
       {error ? <StyledErrorMessage>{error}</StyledErrorMessage> : null}
-    </StyledWrapper>
+    </StyledWrapper >
   )
 }
 

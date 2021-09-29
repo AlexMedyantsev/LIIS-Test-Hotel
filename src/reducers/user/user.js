@@ -7,10 +7,6 @@ export const initialState = {
 
 export const ActionType = {
   CHANGE_IS_AUTHENTICATED: `CHANGE_IS_AUTHENTICATED`,
-  loginForm: {
-    loginInput: null,
-    passwordInput: null,
-  }
 }
 
 export const ActionCreator = {

@@ -29,6 +29,38 @@ code {
   margin: 5px 0 0;
 } 
 
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  top: 15px;
+  right: 19px;
+
+  width: 18px;
+  height: 18px;
+
+  background-image: url('../images/calendar-today.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+body::-webkit-scrollbar{
+  width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #E7E7E7;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #41522E;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #41522E;
+}
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126

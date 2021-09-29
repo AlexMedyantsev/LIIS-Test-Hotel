@@ -1,4 +1,4 @@
-import React,{ useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
