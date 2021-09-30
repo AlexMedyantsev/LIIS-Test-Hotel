@@ -72,7 +72,7 @@ function AuthModule() {
     >
       <StyledTitle>Simple Hotel Check</StyledTitle>
       <InputWithLabel
-        type="text"
+        type="email"
         name="login"
         labelText="Логин"
         isRequired={true}
