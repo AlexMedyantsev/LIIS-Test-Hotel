@@ -1,3 +1,3 @@
-export const getNews = () => ({
+export const getHotels = () => ({
   type: 'GET_HOTELS',
 });

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import {hotels} from "../utils/const"
 import {useSelector} from 'react-redux'
 import HotelsList from "./HotelsList"
@@ -65,6 +65,65 @@ function Favorites() {
     isActive: false,
     isOrderUp: true,
   })
+  const favoriteHotels = useSelector((state) => state.DATA.favoriteHotels)
+
+  useEffect(() => {
+    filterHotels()
+  }, [favoriteHotels.length])
+
+  const filterHotels = () => {
+    if (!ratingButton.isActive && !priceButton.isActive) {
+      return favoriteHotels
+    }
+
+    // {RATING ⬆️, PRICE ⬆️}
+    if (ratingButton.isActive && ratingButton.isOrderUp &&
+        priceButton.isActive && priceButton.isOrderUp) {
+      return favoriteHotels.sort((a, b) => a.stars - b.stars || a.priceAvg - b.priceAvg);
+    }
+    
+    // {RATING ⬇️, PRICE ⬇️}
+    if (ratingButton.isActive && !ratingButton.isOrderUp && 
+       priceButton.isActive && !priceButton.isOrderUp) {
+      return favoriteHotels.sort((a, b) => b.stars - a.stars || b.priceAvg - a.priceAvg);
+    }
+
+    // {RATING ⬆️, PRICE ⬇️}
+    if (ratingButton.isActive && ratingButton.isOrderUp && 
+        priceButton.isActive && !priceButton.isOrderUp) {
+      return favoriteHotels.sort((a, b) => a.stars - b.stars || b.priceAvg - a.priceAvg);
+    }
+
+    // {RATING ⬇️, PRICE ⬆️}
+    if (ratingButton.isActive && !ratingButton.isOrderUp &
+        priceButton.isActive && priceButton.isOrderUp) {
+      return favoriteHotels.sort((a, b) => b.stars - a.stars || a.priceAvg - b.priceAvg);
+    }
+
+    // {RATING ⬇️,  ̶p̶r̶i̶c̶e̶}
+    if (ratingButton.isActive && !ratingButton.isOrderUp &&
+       !priceButton.isActive) {
+      return favoriteHotels.sort((a, b) => b.priceAvg - a.priceAvg);
+    }
+
+    // {RATING ⬆️,  ̶p̶r̶i̶c̶e̶}
+    if (ratingButton.isActive && ratingButton.isOrderUp &&
+       !priceButton.isActive) {
+      return favoriteHotels.sort((a, b) => a.stars - b.stars);
+    }
+
+    // {r̶a̶t̶i̶n̶g̶, PRICE ⬆️}
+    if (!ratingButton.isActive && priceButton.isActive &&
+      priceButton.isOrderUp) {
+      return favoriteHotels.sort((a, b) => a.priceAvg - b.priceAvg);
+    }
+
+    // {r̶a̶t̶i̶n̶g̶, PRICE ⬇️}
+    if (!ratingButton.isActive && priceButton.isActive &&
+       !priceButton.isOrderUp) {
+      return favoriteHotels.sort((a, b) => b.priceAvg - a.priceAvg);
+    }
+  }
 
   const ratingButtonClickHandler = (name) => {
     if (!ratingButton.isActive) {
@@ -98,8 +157,6 @@ function Favorites() {
       return arrowsDown
     }
   }
-
-  const favoriteHotels = useSelector((state) => state.DATA.favoriteHotels)
   return (
     <>
       <StyledTitle>Избранное</StyledTitle>
@@ -121,7 +178,7 @@ function Favorites() {
           <StyledArrows backgroundImage={() => getRightArrowImage(priceButton)}></StyledArrows>
         </StyledSortButton>
       </StyledWrapper>
-      <HotelsList hotels={favoriteHotels} hasImage={false} />
+      <HotelsList hotels={filterHotels(favoriteHotels)} hasImage={false} />
     </>
   )
 }

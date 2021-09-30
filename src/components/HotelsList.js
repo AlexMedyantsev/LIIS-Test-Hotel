@@ -7,7 +7,7 @@ const StyledList = styled('ul')`
 
   width: 100%;
   height: 500px;
-  overflow-y: auto;
+  overflow-y: scroll;
 `
 
 function HotelsList({hotels, hasImage}) {

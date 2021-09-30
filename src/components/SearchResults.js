@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux'
 import svg from "../images/arrow-right.svg"
 import HotelsList from './HotelsList'
 import {ScrollingCarousel} from '@trendyol-js/react-carousel';
-import {getNews} from "../redux-saga/actions"
+import {getHotels} from "../redux-saga/actions"
 import {connect} from 'react-redux';
 import {formatData} from "../utils/common"
 
@@ -109,7 +109,7 @@ function SearchResults({getNews, data}) {
   const favoriteHotels = useSelector((state) => state.DATA.favoriteHotels)
 
   useEffect(() => {
-    getNews()
+    getHotels()
   }, []);
 
   return (
@@ -144,7 +144,7 @@ function SearchResults({getNews, data}) {
 }
 
 const mapDispatchToProps = {
-  getNews: getNews,
+  getHotels: getHotels,
 };
 
 export default connect(
