@@ -1,4 +1,6 @@
 import {useDispatch} from 'react-redux'
+import {useEffect} from "react"
+import moment from "moment"
 import styled from 'styled-components'
 import logoutIcon from "../images/logout-icon.svg"
 import HotelSearchForm from "./HotelSearchForm"
@@ -85,6 +87,14 @@ function MainPage() {
   const logoutClickHandler = () => {
     dispatch({type: 'CHANGE_IS_AUTHENTICATED'})
   }
+
+  // useEffect(() => {
+  //   dispatch({type: 'CHANGE_SEARCH_DATA', payload: {location: 'Moscow', checkInDate: moment().format('YYYY-MM-DD'), daysInHotelAmount: 1}})
+  // }, []);
+
+  useEffect(() => {
+    dispatch({type: 'GET_HOTELS'})
+  }, [])
 
   return (
     <>

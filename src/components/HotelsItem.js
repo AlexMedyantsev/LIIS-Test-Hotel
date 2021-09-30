@@ -3,7 +3,7 @@ import house from "../images/house.svg"
 import yellowStar from "../images/yellow-star.svg"
 import grayStar from "../images/gray-star.svg"
 import heartImage from "../images/heart.svg"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import {formatData} from "../utils/common"
 
 const StyledItem = styled('li')`
@@ -43,6 +43,7 @@ const StyledHotelImage = styled('div')`
 
 const StyledHotelName = styled('span')`
   font-family: Roboto;
+  max-width: 80%;
   font-size: 17px;
   font-style: normal;
   font-weight: 300;
@@ -129,7 +130,9 @@ const StyledPrice = styled('span')`
 `
 
 function HotelsItem({hotel, hasImage}) {
+  const dispatch = useDispatch()
   const searchValue = useSelector((state) => state.UI.search)
+  const favoriteHotels = useSelector((state) => state.DATA.favoriteHotels)
 
   const drawRatingStars = (rating) => {
     const starsArray = [];
@@ -150,6 +153,14 @@ function HotelsItem({hotel, hasImage}) {
     return starsArray
   }
 
+  const heartClickHandler = (hotel) => {
+    if (favoriteHotels.length > 0 && favoriteHotels.filter(item => item.hotelId === hotel.hotelId).length > 0) {
+      dispatch({type: 'REMOVE_HOTEL_FROM_FAVORITES', payload: hotel})
+    } else {
+      dispatch({type: 'ADD_HOTEL_TO_FAVORITES', payload: hotel})
+    }
+  }
+
   return (
     <StyledItem>
       <StyledWrapper>
@@ -162,7 +173,9 @@ function HotelsItem({hotel, hasImage}) {
 
         <StyledWrapper width={'100%'} justifyContent={'space-between'}>
           <StyledHotelName>{hotel.hotelName}</StyledHotelName>
-          <StyledHeart></StyledHeart>
+          <StyledHeart
+            onClick={() => heartClickHandler(hotel)}
+          />
         </StyledWrapper>
 
         <StyledWrapper alignItems={'center'}>

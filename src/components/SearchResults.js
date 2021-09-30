@@ -91,11 +91,22 @@ const StyledFavoritesSpan = styled('span')`
   color: #424242;
 `
 
+const StyledHotelsNumber = styled('span')`
+  font-family: Roboto;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: -0.40799999237060547px;
+  text-align: left;
+`
+
 
 function SearchResults({getNews, data}) {
   const carouselImages = useSelector((state) => state.DATA.carouselImages)
   const hotels = useSelector((state) => state.DATA.hotels)
   const searchValue = useSelector((state) => state.UI.search)
+  const favoriteHotels = useSelector((state) => state.DATA.favoriteHotels)
 
   useEffect(() => {
     getNews()
@@ -124,7 +135,7 @@ function SearchResults({getNews, data}) {
       </StyledImagesList>
 
       {/* Строка с количеством избранных отелей */}
-      <StyledFavoritesSpan>Добавлено в Избранное: <b>3</b> отеля</StyledFavoritesSpan>
+      <StyledFavoritesSpan>Добавлено в Избранное: <StyledHotelsNumber>{favoriteHotels.length}</StyledHotelsNumber> отеля</StyledFavoritesSpan>
 
       {/* Список Отелей*/}
       <HotelsList hotels={hotels} hasImage={true} />

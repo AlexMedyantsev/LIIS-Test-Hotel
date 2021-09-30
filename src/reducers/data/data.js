@@ -11,6 +11,8 @@ export const initialState = {
 
 export const ActionType = {
   CHANGE_IS_AUTHENTICATED: `CHANGE_IS_AUTHENTICATED`,
+  ADD_HOTEL_TO_FAVORITES: `ADD_HOTEL_TO_FAVORITES`,
+  REMOVE_HOTEL_FROM_FAVORITES: `REMOVE_HOTEL_FROM_FAVORITES`
 }
 
 export const ActionCreator = {
@@ -18,9 +20,14 @@ export const ActionCreator = {
     type: ActionType.CHANGE_IS_AUTHENTICATED,
     payload: userData,
   }),
-  // getNews: () => ({
-  //   type: 'GET_HOTELS',
-  // }),
+  addHotelToFavorites: (hotel) => ({
+    type: ActionType.ADD_HOTEL_TO_FAVORITES,
+    payload: hotel,
+  }),
+  removeHotelFromFavorites: (hotel) => ({
+    type: ActionType.REMOVE_HOTEL_FROM_FAVORITES,
+    payload: hotel,
+  }),
 };
 
 export const reducer = (state = initialState, action) => {
@@ -30,6 +37,10 @@ export const reducer = (state = initialState, action) => {
       return {...state, loading: true};
     case 'HOTELS_RECEIVED':
       return {...state, hotels: action.json, loading: false}
+    case 'ADD_HOTEL_TO_FAVORITES':
+      return {...state, favoriteHotels: [...state.favoriteHotels, action.payload]}
+    case 'REMOVE_HOTEL_FROM_FAVORITES':
+      return {...state, favoriteHotels: state.favoriteHotels.filter(item => item.hotelId !== action.payload.hotelId)}
     default:
       return state;
   }
