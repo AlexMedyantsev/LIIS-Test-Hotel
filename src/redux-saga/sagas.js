@@ -1,11 +1,11 @@
 import { put, takeLatest, all, select } from 'redux-saga/effects';
 import moment from 'moment';
-import * as UIselectors from '../reducers/ui/selectors.js';
+import * as Searchselectors from '../reducers/search/selectors.js';
 
 function* fetchHotels() {
-  const query = yield select(UIselectors.searchValue);
+  const query = yield select(Searchselectors.searchValue);
   const checkoutDate = yield moment(query.checkInDate).add(query.daysInHotelAmount, 'days').format('YYYY-MM-DD');
-  const json = yield fetch(`http://engine.hotellook.com/api/v2/cache.json?location=${query.location}&currency=rub&checkIn=${query.checkInDate}&checkOut=${checkoutDate}&limit=10`)
+  const json = yield fetch(`https://engine.hotellook.com/api/v2/cache.json?location=${query.location}&currency=rub&checkIn=${query.checkInDate}&checkOut=${checkoutDate}&limit=10`)
         .then(response => response.json(), );    
   yield put({ type: "HOTELS_RECEIVED", json: json, });
 }

@@ -24,6 +24,16 @@ const StyledTitle = styled('h2')`
   text-align: left;
 `
 
+const StyledEmptyText = styled('span')`
+  font-family: Roboto;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 22px;
+  letter-spacing: -0.40799999237060547px;
+  text-align: left;
+`
+
 const StyledSortButton = styled('div')`
   display: flex;
   align-items: center;
@@ -78,37 +88,37 @@ function Favorites() {
 
     // {RATING ⬆️, PRICE ⬆️}
     if (ratingButton.isActive && ratingButton.isOrderUp &&
-        priceButton.isActive && priceButton.isOrderUp) {
+      priceButton.isActive && priceButton.isOrderUp) {
       return favoriteHotels.sort((a, b) => a.stars - b.stars || a.priceAvg - b.priceAvg);
     }
-    
+
     // {RATING ⬇️, PRICE ⬇️}
-    if (ratingButton.isActive && !ratingButton.isOrderUp && 
-       priceButton.isActive && !priceButton.isOrderUp) {
+    if (ratingButton.isActive && !ratingButton.isOrderUp &&
+      priceButton.isActive && !priceButton.isOrderUp) {
       return favoriteHotels.sort((a, b) => b.stars - a.stars || b.priceAvg - a.priceAvg);
     }
 
     // {RATING ⬆️, PRICE ⬇️}
-    if (ratingButton.isActive && ratingButton.isOrderUp && 
-        priceButton.isActive && !priceButton.isOrderUp) {
+    if (ratingButton.isActive && ratingButton.isOrderUp &&
+      priceButton.isActive && !priceButton.isOrderUp) {
       return favoriteHotels.sort((a, b) => a.stars - b.stars || b.priceAvg - a.priceAvg);
     }
 
     // {RATING ⬇️, PRICE ⬆️}
     if (ratingButton.isActive && !ratingButton.isOrderUp &
-        priceButton.isActive && priceButton.isOrderUp) {
+      priceButton.isActive && priceButton.isOrderUp) {
       return favoriteHotels.sort((a, b) => b.stars - a.stars || a.priceAvg - b.priceAvg);
     }
 
     // {RATING ⬇️,  ̶p̶r̶i̶c̶e̶}
     if (ratingButton.isActive && !ratingButton.isOrderUp &&
-       !priceButton.isActive) {
+      !priceButton.isActive) {
       return favoriteHotels.sort((a, b) => b.priceAvg - a.priceAvg);
     }
 
     // {RATING ⬆️,  ̶p̶r̶i̶c̶e̶}
     if (ratingButton.isActive && ratingButton.isOrderUp &&
-       !priceButton.isActive) {
+      !priceButton.isActive) {
       return favoriteHotels.sort((a, b) => a.stars - b.stars);
     }
 
@@ -120,7 +130,7 @@ function Favorites() {
 
     // {r̶a̶t̶i̶n̶g̶, PRICE ⬇️}
     if (!ratingButton.isActive && priceButton.isActive &&
-       !priceButton.isOrderUp) {
+      !priceButton.isOrderUp) {
       return favoriteHotels.sort((a, b) => b.priceAvg - a.priceAvg);
     }
   }
@@ -160,25 +170,35 @@ function Favorites() {
   return (
     <>
       <StyledTitle>Избранное</StyledTitle>
-      <StyledWrapper marginBottom={'28px'}>
-        <StyledSortButton
-          width={'89px'}
-          onClick={ratingButtonClickHandler}
-          borderColor={ratingButton.isActive ? '#41522E' : '#E5E5E5'}
-        >
-          Рейтинг
-          <StyledArrows backgroundImage={() => getRightArrowImage(ratingButton)}></StyledArrows>
-        </StyledSortButton>
-        <StyledSortButton
-          width={'71px'}
-          onClick={priceButtonClickHandler}
-          borderColor={priceButton.isActive ? '#41522E' : '#E5E5E5'}
-        >
-          Цена
-          <StyledArrows backgroundImage={() => getRightArrowImage(priceButton)}></StyledArrows>
-        </StyledSortButton>
-      </StyledWrapper>
-      <HotelsList hotels={filterHotels(favoriteHotels)} hasImage={false} />
+      {
+        favoriteHotels && favoriteHotels.length !== 0 ?
+          <StyledWrapper marginBottom={'28px'}>
+            <StyledSortButton
+              width={'89px'}
+              onClick={ratingButtonClickHandler}
+              borderColor={ratingButton.isActive ? '#41522E' : '#E5E5E5'}
+            >
+              Рейтинг
+              <StyledArrows backgroundImage={() => getRightArrowImage(ratingButton)}></StyledArrows>
+            </StyledSortButton>
+            <StyledSortButton
+              width={'71px'}
+              onClick={priceButtonClickHandler}
+              borderColor={priceButton.isActive ? '#41522E' : '#E5E5E5'}
+            >
+              Цена
+              <StyledArrows backgroundImage={() => getRightArrowImage(priceButton)}></StyledArrows>
+            </StyledSortButton>
+          </StyledWrapper> : ``
+      }
+      {
+        favoriteHotels && favoriteHotels.length === 0 ?
+          <StyledWrapper>
+            <StyledEmptyText>У вас нет избранных отелей</StyledEmptyText>
+          </StyledWrapper>
+          : ``
+      }
+      <HotelsList hotels={filterHotels(favoriteHotels)} hasImage={false} height={'350px'} />
     </>
   )
 }

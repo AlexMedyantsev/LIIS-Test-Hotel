@@ -95,7 +95,7 @@ const StyledHeart = styled('div')`
 
   background-image: url(${heartImage});
   background-repeat: no-repeat;
-  background-size: contain
+  background-size: contain;
   cursor: pointer;
 `
 
@@ -131,7 +131,7 @@ const StyledPrice = styled('span')`
 
 function HotelsItem({hotel, hasImage}) {
   const dispatch = useDispatch()
-  const searchValue = useSelector((state) => state.UI.search)
+  const searchValue = useSelector((state) => state.SEARCH.search)
   const favoriteHotels = useSelector((state) => state.DATA.favoriteHotels)
 
   const drawRatingStars = (rating) => {
@@ -184,8 +184,8 @@ function HotelsItem({hotel, hasImage}) {
           <StyledDateInfo>{searchValue.daysInHotelAmount} день</StyledDateInfo>
         </StyledWrapper>
         <StyledWrapper>
-          {drawRatingStars(hotel.stars).map((star) => {
-            return <StyledStar backgroundImage={star === 'yellow' ? yellowStar : grayStar} />
+          {drawRatingStars(hotel.stars).map((star, index) => {
+            return <StyledStar key={index} backgroundImage={star === 'yellow' ? yellowStar : grayStar} />
           })}
         </StyledWrapper>
       </StyledWrapper>

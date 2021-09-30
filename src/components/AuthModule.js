@@ -8,18 +8,18 @@ import {Link} from "react-router-dom"
 const validate = values => {
   const errors = {};
 
+  if (!values.login) {
+    errors.login = 'Заполните это поле';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.login)) {
+    errors.login = 'Некорректная почта';
+  }
+
   if (!values.password) {
     errors.password = 'Заполните это поле';
   } else if (values.password.length < 7) {
     errors.password = 'В Пароле должно быть минимум 8 символов ';
   } else if (/[а-яА-ЯЁё]/.test(values.password)) {
     errors.password = 'В пароле нельзя использовать киррилицу'
-  }
-
-  if (!values.email) {
-    errors.email = 'Заполните это поле';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Некорректная почта';
   }
 
   return errors;
@@ -53,7 +53,7 @@ function AuthModule() {
 
   const formik = useFormik({
     initialValues: {
-      email: '',
+      login: '',
       password: '',
     },
     validateOnBlur: false,
@@ -72,14 +72,14 @@ function AuthModule() {
     >
       <StyledTitle>Simple Hotel Check</StyledTitle>
       <InputWithLabel
-        type="email"
-        name="email"
+        type="text"
+        name="login"
         labelText="Логин"
         isRequired={true}
         onChangeHandler={formik.handleChange}
         onBlurHandler={formik.handleBlur}
-        value={formik.values.email}
-        error={formik.errors.email}
+        value={formik.values.login}
+        error={formik.errors.login}
       />
       <InputWithLabel
         type="password"
@@ -92,7 +92,6 @@ function AuthModule() {
         error={formik.errors.password}
       />
       <Button text={'Войти'} type={'submit'} />
-      <Link to="/main">Ссылка</Link>
     </StyledForm>
   )
 }

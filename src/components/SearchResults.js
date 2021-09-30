@@ -105,7 +105,7 @@ const StyledHotelsNumber = styled('span')`
 function SearchResults({getNews, data}) {
   const carouselImages = useSelector((state) => state.DATA.carouselImages)
   const hotels = useSelector((state) => state.DATA.hotels)
-  const searchValue = useSelector((state) => state.UI.search)
+  const searchValue = useSelector((state) => state.SEARCH.search)
   const favoriteHotels = useSelector((state) => state.DATA.favoriteHotels)
 
   useEffect(() => {
@@ -127,9 +127,9 @@ function SearchResults({getNews, data}) {
 
       {/* Карусель с картинками*/}
       <StyledImagesList>
-        <ScrollingCarousel nextIcon="" nextLabel="" show={3.5} slide={3} swiping={true} useArrowKeys={false}>
+        <ScrollingCarousel show={3.5} slide={3} swiping={true}>
           {carouselImages.map((image) => {
-            return <StyledImagesItem key="image" backgroundImage={image} ></StyledImagesItem>
+            return <StyledImagesItem key={image} backgroundImage={image} ></StyledImagesItem>
           })}
         </ScrollingCarousel>
       </StyledImagesList>
@@ -138,7 +138,7 @@ function SearchResults({getNews, data}) {
       <StyledFavoritesSpan>Добавлено в Избранное: <StyledHotelsNumber>{favoriteHotels.length}</StyledHotelsNumber> отеля</StyledFavoritesSpan>
 
       {/* Список Отелей*/}
-      <HotelsList hotels={hotels} hasImage={true} />
+      <HotelsList hotels={hotels} hasImage={true} height={'600px'}/>
     </StyledMainContainer>
   )
 }
@@ -151,5 +151,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(SearchResults);
-
-// export default SearchResults

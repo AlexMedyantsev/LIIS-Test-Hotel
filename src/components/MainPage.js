@@ -79,6 +79,7 @@ const StyledLogoutButton = styled('button')`
     background-repeat: no-repeat;
     background-size: cover;
   }
+  cursor: pointer;
 `
 
 function MainPage() {
@@ -125,6 +126,7 @@ function MainPage() {
             <StyledSection
               width={'664px'}
               marginLeft={'24px'}
+              marginBottom={'30px'}
               paddingTop={'48px'}
             >
               <SearchResults />

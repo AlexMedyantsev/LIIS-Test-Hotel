@@ -6,15 +6,15 @@ const StyledList = styled('ul')`
   flex-direction: column;
 
   width: 100%;
-  height: 500px;
-  overflow-y: scroll;
+  max-height: ${props => props.height};
+  overflow-y: auto;
 `
 
-function HotelsList({hotels, hasImage}) {
+function HotelsList({hotels, height, hasImage}) {
   return (
-    <StyledList>
+    <StyledList height={height}>
       {hotels && hotels.map((hotel) => {
-        return <HotelsItem key={hotel.name} hotel={hotel} hasImage={hasImage}/>
+        return <HotelsItem key={hotel.hotelName + hotel.avgPrice} hotel={hotel} hasImage={hasImage}/>
       })}
     </StyledList>
   )

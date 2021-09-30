@@ -30,7 +30,7 @@ const validate = values => {
 
 function HotelSearchForm() {
   const dispatch = useDispatch()
-  const searchValue = useSelector((state) => state.UI.search)
+  const searchValue = useSelector((state) => state.SEARCH.search)
 
   const formik = useFormik({
     initialValues: {
