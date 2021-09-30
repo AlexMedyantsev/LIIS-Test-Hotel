@@ -6,12 +6,14 @@ const StyledList = styled('ul')`
   flex-direction: column;
 
   width: 100%;
+  height: 500px;
+  overflow: auto;
 `
 
 function HotelsList({hotels, hasImage}) {
   return (
     <StyledList>
-      {hotels.map((hotel) => {
+      {hotels && hotels.map((hotel) => {
         return <HotelsItem key={hotel.name} hotel={hotel} hasImage={hasImage}/>
       })}
     </StyledList>

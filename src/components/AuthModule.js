@@ -56,6 +56,8 @@ function AuthModule() {
       email: '',
       password: '',
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     validate,
     onSubmit: values => {
       dispatch({type: 'CHANGE_IS_AUTHENTICATED'})

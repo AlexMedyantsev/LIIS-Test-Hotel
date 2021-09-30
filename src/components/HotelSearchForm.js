@@ -3,6 +3,8 @@ import Button from "./Button"
 import InputWithLabel from "./InputWithLabel"
 import {useDispatch} from 'react-redux'
 import {useFormik} from 'formik';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 const StyledForm = styled('form')`
   width: 100%;
@@ -11,44 +13,42 @@ const StyledForm = styled('form')`
 const validate = values => {
   const errors = {};
 
-  if (!values.checkInDate) {
-    errors.checkInDate = 'Заполните это поле';
-  } else if (values.checkInDate.length < 7) {
-    errors.checkInDate = 'В Пароле должно быть минимум 8 символов ';
-  } else if (/[а-яА-ЯЁё]/.test(values.checkInDate)) {
-    errors.checkInDate = 'В пароле нельзя использовать киррилицу'
-  }
-
   if (!values.location) {
     errors.location = 'Заполните это поле';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.location)) {
-    errors.location = 'Некорректная почта';
-  }
+  } 
 
-  if (!values.daysAmount) {
-    errors.daysAmount = 'Заполните это поле';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.daysAmount)) {
-    errors.daysAmount = 'Некорректная почта';
-  }
+  if (!values.checkInDate) {
+    errors.checkInDate = 'Заполните это поле';
+  } 
+
+  if (!values.daysInHotelAmount) {
+    errors.daysInHotelAmount = 'Заполните это поле';
+  } 
 
   return errors;
 };
 
 function HotelSearchForm() {
   const dispatch = useDispatch()
+  const searchValue = useSelector((state) => state.UI.search)
+
   const formik = useFormik({
     initialValues: {
       location: '',
-      password: '',
-      daysAmount: '',
+      checkInDate: '',
+      daysInHotelAmount: '',
     },
+    validate,
     validateOnBlur: false,
     validateOnChange: false,
-    validate,
     onSubmit: values => {
-      dispatch({type: 'CHANGE_IS_AUTHENTICATED'})
+      dispatch({type: 'CHANGE_SEARCH_DATA', payload: {location: values.location, checkInDate: values.checkInDate, daysInHotelAmount: values.daysInHotelAmount}})
     },
   });
+
+  useEffect(() => {
+    dispatch({type: 'GET_HOTELS'})
+  }, [searchValue])
 
   return (
     <StyledForm onSubmit={formik.handleSubmit}>
@@ -76,15 +76,15 @@ function HotelSearchForm() {
 
       <InputWithLabel
         type="number"
-        name="daysAmount"
+        name="daysInHotelAmount"
         labelText="Количество Дней"
         isRequired={true}
         onChangeHandler={formik.handleChange}
         onBlurHandler={formik.handleBlur}
-        value={formik.values.daysAmount}
-        error={formik.errors.daysAmount}
+        value={formik.values.daysInHotelAmount}
+        error={formik.errors.daysInHotelAmount}
       />
-      <Button text={'Войти'} type={'submit'} />
+      <Button text={'Найти'} type={'submit'} />
     </StyledForm>
   )
 }

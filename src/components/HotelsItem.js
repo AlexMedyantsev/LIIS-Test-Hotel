@@ -1,7 +1,10 @@
 import styled from "styled-components"
+import house from "../images/house.svg"
 import yellowStar from "../images/yellow-star.svg"
 import grayStar from "../images/gray-star.svg"
 import heartImage from "../images/heart.svg"
+import { useSelector } from "react-redux"
+import {formatData} from "../utils/common"
 
 const StyledItem = styled('li')`
   position: relative;
@@ -27,8 +30,13 @@ const StyledWrapper = styled('div')`
 const StyledHotelImage = styled('div')`
   width: 64px;
   height: 64px;
-
   margin-right: 24px;
+
+  background-image: url(${house});
+  background-repeat: no-repeat;
+  background-size: 35px 35px;
+  background-position: center;
+
   background-color: #41522E0D;
   border-radius: 50%;
 `
@@ -90,6 +98,7 @@ const StyledHeart = styled('div')`
   cursor: pointer;
 `
 
+
 const StyledPrice = styled('span')`
   position: absolute;
   content: 'hey';
@@ -103,9 +112,24 @@ const StyledPrice = styled('span')`
   letter-spacing: -0.40799999237060547px;
   text-align: right;
 
+  &:before {
+    position: absolute;
+    content: 'Price:';
+    top: 2.5px;
+    left: -40px;
+    font-family: Roboto;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 22px;
+    letter-spacing: -0.40799999237060547px;
+    text-align: left;
+    color: #878787;
+  }
 `
 
 function HotelsItem({hotel, hasImage}) {
+  const searchValue = useSelector((state) => state.UI.search)
 
   const drawRatingStars = (rating) => {
     const starsArray = [];
@@ -137,22 +161,22 @@ function HotelsItem({hotel, hasImage}) {
       <StyledWrapper width={'100%'} flexDirection="column" alignItems={'flex-start'}>
 
         <StyledWrapper width={'100%'} justifyContent={'space-between'}>
-          <StyledHotelName>{hotel.name}</StyledHotelName>
+          <StyledHotelName>{hotel.hotelName}</StyledHotelName>
           <StyledHeart></StyledHeart>
         </StyledWrapper>
 
         <StyledWrapper alignItems={'center'}>
-          <StyledDateInfo>{hotel.date}</StyledDateInfo>
+          <StyledDateInfo>{formatData(searchValue.checkInDate)}</StyledDateInfo>
           <StyledDateDash></StyledDateDash>
-          <StyledDateInfo>{hotel.daysAmount} день</StyledDateInfo>
+          <StyledDateInfo>{searchValue.daysInHotelAmount} день</StyledDateInfo>
         </StyledWrapper>
         <StyledWrapper>
-          {drawRatingStars(hotel.rating).map((star) => {
+          {drawRatingStars(hotel.stars).map((star) => {
             return <StyledStar backgroundImage={star === 'yellow' ? yellowStar : grayStar} />
           })}
         </StyledWrapper>
       </StyledWrapper>
-      <StyledPrice>{hotel.price} ₽</StyledPrice>
+      <StyledPrice>{Math.floor(hotel.priceAvg)} ₽</StyledPrice>
     </StyledItem>
   )
 }

@@ -1,8 +1,13 @@
 import styled from 'styled-components';
+import {useEffect} from "react"
 import {useSelector} from 'react-redux'
 import svg from "../images/arrow-right.svg"
 import HotelsList from './HotelsList'
-import {hotels} from '../utils/const';
+import {ScrollingCarousel} from '@trendyol-js/react-carousel';
+import {getNews} from "../redux-saga/actions"
+import {connect} from 'react-redux';
+import {formatData} from "../utils/common"
+
 
 const StyledMainContainer = styled('div')`
   width: 100%;
@@ -87,8 +92,15 @@ const StyledFavoritesSpan = styled('span')`
 `
 
 
-function SearchResults() {
+function SearchResults({getNews, data}) {
   const carouselImages = useSelector((state) => state.DATA.carouselImages)
+  const hotels = useSelector((state) => state.DATA.hotels)
+  const searchValue = useSelector((state) => state.UI.search)
+
+  useEffect(() => {
+    getNews()
+  }, []);
+
   return (
     <StyledMainContainer>
 
@@ -97,16 +109,18 @@ function SearchResults() {
         <StyledWrapper alignItems={'center'}>
           <StyledSearchLocationInfo>Отели</StyledSearchLocationInfo>
           <StyledArrow />
-          <StyledSearchLocationInfo>Москва</StyledSearchLocationInfo>
+          <StyledSearchLocationInfo>{searchValue.location}</StyledSearchLocationInfo>
         </StyledWrapper>
-        <StyledSearchDate>07 Июля 2020</StyledSearchDate>
+        <StyledSearchDate>{formatData(searchValue.checkInDate)}</StyledSearchDate>
       </StyledWrapper>
 
       {/* Карусель с картинками*/}
       <StyledImagesList>
-        {carouselImages.map((image) => {
-          return <StyledImagesItem key="" backgroundImage={image} ></StyledImagesItem>
-        })}
+        <ScrollingCarousel nextIcon="" nextLabel="" show={3.5} slide={3} swiping={true} useArrowKeys={false}>
+          {carouselImages.map((image) => {
+            return <StyledImagesItem key="image" backgroundImage={image} ></StyledImagesItem>
+          })}
+        </ScrollingCarousel>
       </StyledImagesList>
 
       {/* Строка с количеством избранных отелей */}
@@ -118,4 +132,13 @@ function SearchResults() {
   )
 }
 
-export default SearchResults
+const mapDispatchToProps = {
+  getNews: getNews,
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SearchResults);
+
+// export default SearchResults

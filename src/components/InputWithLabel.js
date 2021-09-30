@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import moment from 'moment'
 
 const StyledWrapper = styled('div')`
   display: flex;
@@ -59,6 +60,7 @@ function InputWithLabel({type, labelText, placeholder, name, isRequired, onChang
         name={name}
         required={isRequired}
         autoComplete="off"
+        min={ type === 'date' ? moment().format('YYYY-MM-DD') : 1}
         borderColor={error ? '#EB1717' : '#C9CACC'}
       />
       {error ? <StyledErrorMessage>{error}</StyledErrorMessage> : null}

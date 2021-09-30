@@ -1,0 +1,1 @@
+export const searchValue = (state) => state.UI.search;
