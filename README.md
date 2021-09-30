@@ -1,5 +1,5 @@
 # LIIS-Test-Hotel
-A test project for LIIS company by ALexey Medyantsev
+A test project for LIIS company by Alexey Medyantsev
 
 Замечания по проекту:
 
@@ -7,4 +7,4 @@ A test project for LIIS company by ALexey Medyantsev
 Виновник библиотека React Carousel.
 
 Недочеты:
-Если не заполнить поле инпута, то кастомная проверка перекрывается дефолтной
+Если не заполнить поле инпута, то кастомная проверка на ошибки перекрывается дефолтной
