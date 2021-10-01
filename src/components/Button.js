@@ -11,7 +11,7 @@ const StyledButton = styled(motion.button)`
   margin-top: 7px;
 
   color: white;
-  font-family: Roboto;
+  ;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;

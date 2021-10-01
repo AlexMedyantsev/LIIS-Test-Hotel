@@ -21,7 +21,7 @@ const StyledWrapper = styled('div')`
 `
 
 const StyledSearchLocationInfo = styled('span')`
-  font-family: Roboto;
+  ;
   font-size: 32px;
   font-style: normal;
   font-weight: 500;
@@ -46,7 +46,7 @@ const StyledArrow = styled('div')`
 
 const StyledSearchDate = styled('span')`
   white-space:nowrap;
-  font-family: Roboto;
+  ;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
@@ -81,7 +81,7 @@ flex: 0 0 auto;
 const StyledFavoritesSpan = styled('span')`
   display: block;
   margin-bottom: 20px;
-  font-family: Roboto;
+  ;
   font-size: 17px;
   font-style: normal;
   font-weight: 300;
@@ -92,7 +92,7 @@ const StyledFavoritesSpan = styled('span')`
 `
 
 const StyledHotelsNumber = styled('span')`
-  font-family: Roboto;
+  ;
   font-size: 17px;
   font-style: normal;
   font-weight: 500;

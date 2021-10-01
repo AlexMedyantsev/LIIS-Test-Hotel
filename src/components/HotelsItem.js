@@ -42,7 +42,7 @@ const StyledHotelImage = styled('div')`
 `
 
 const StyledHotelName = styled('span')`
-  font-family: Roboto;
+  ;
   max-width: 80%;
   font-size: 17px;
   font-style: normal;
@@ -54,7 +54,7 @@ const StyledHotelName = styled('span')`
 
 const StyledDateInfo = styled('span')`
   padding-bottom: 10px;
-  font-family: Roboto;
+  ;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -105,7 +105,7 @@ const StyledPrice = styled('span')`
   content: 'hey';
   bottom: 19px;
   right: 18px;
-  font-family: Roboto;
+  ;
   font-size: 17px;
   font-style: normal;
   font-weight: 400;
@@ -118,7 +118,7 @@ const StyledPrice = styled('span')`
     content: 'Price:';
     top: 2.5px;
     left: -40px;
-    font-family: Roboto;
+    ;
     font-size: 11px;
     font-style: normal;
     font-weight: 300;

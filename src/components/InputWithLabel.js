@@ -8,7 +8,7 @@ const StyledWrapper = styled('div')`
 `
 
 const StyledLabel = styled('label')`
-  font-family: Roboto;
+  ;
   font-size: 16px;
   font-style: normal;
   font-weight: 300;
@@ -28,7 +28,7 @@ const StyledInput = styled('input')`
   margin-bottom: 20px;
   padding: 16px;
 
-  font-family: Roboto;
+  ;
   font-size: 16px;
   font-style: normal;
   font-weight: 300;

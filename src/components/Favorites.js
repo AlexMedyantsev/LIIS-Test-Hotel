@@ -15,7 +15,7 @@ const StyledWrapper = styled('div')`
 const StyledTitle = styled('h2')`
   display: block;
   margin-bottom: 32px;
-  font-family: Roboto;
+  ;
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
@@ -25,7 +25,7 @@ const StyledTitle = styled('h2')`
 `
 
 const StyledEmptyText = styled('span')`
-  font-family: Roboto;
+  ;
   font-size: 17px;
   font-style: normal;
   font-weight: 300;
@@ -44,7 +44,7 @@ const StyledSortButton = styled('div')`
   border: 1px solid ${props => props.borderColor};
   background: 0;
 
-  font-family: Roboto;
+  ;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

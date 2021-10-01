@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe SEARCH', 'Roboto', 'Oxygen',
+  font-family: 'Roboto', 'Segoe SEARCH', 'Oxygen', -apple-system, BlinkMacSystemFont, 
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -76,6 +76,10 @@ div div[data-arrow="right"] button {
 button[data-direction="left"],
 button[data-direction="right"] {
   display: none;
+}
+
+input[type=date] {
+  font-family: 'Roboto' !important;
 }
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -168,7 +172,6 @@ video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
   vertical-align: baseline;
 }
 

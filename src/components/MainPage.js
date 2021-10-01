@@ -44,7 +44,7 @@ const StyledLogo = styled('h1')`
   position: absolute;
   top: 32px;
   left: 32px;
-  font-family: Roboto;
+  ;
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
@@ -59,7 +59,7 @@ const StyledLogoutButton = styled('button')`
   right: 68px;
   border: 0;
   background: none;
-  font-family: Roboto;
+  ;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;

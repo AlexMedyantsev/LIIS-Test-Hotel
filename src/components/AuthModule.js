@@ -36,7 +36,7 @@ const StyledForm = styled('form')`
 
 
 const StyledTitle = styled('h1')`
-  font-family: Roboto;
+  ;
   font-size: 24px;
   font-weight: 500;
   line-height: 28px;
